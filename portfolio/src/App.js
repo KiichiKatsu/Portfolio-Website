@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import logo from './Assets/logo.svg';
+import btnIcon from './Assets/btn-icon.svg';
 import './App.css';
+
+function Header() { 
+	return (
+    <div className="Header rubik-S2">
+      <img src={logo} className="Logo" alt="Logo" />
+      <div className="Menu">
+        <div className="Availability">
+          <img className="Status" alt=""/>
+          <p>AVAILABLE</p>
+        </div>
+        <button className="btn-pointer">
+          <img src={btnIcon} className="btn-icon" alt=""/>
+          ABOUT ME
+        </button>
+      </div>
+    </div>
+	);
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
     </div>
   );
 }
