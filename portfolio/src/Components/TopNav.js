@@ -13,7 +13,7 @@ function TopNav() {
           <h5>AVAILABLE</h5>
         </div>
         <button className="btn-aboutme">
-          <img src={btnIcon} className="btn-icon" alt=""/>
+          <img src={btnIcon} alt=""/>
           <h5>ABOUT ME</h5>
         </button>
       </div>

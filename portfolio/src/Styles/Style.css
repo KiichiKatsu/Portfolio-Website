@@ -11,7 +11,7 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 /*------------------------------------------------------------------*/
 :root {
   /* Colours */
-  --primary:       #1E1E1E;
+  --primary:       #1A1A1A;
   --primary-light: color-mod(var(--color-primary) tint(15%));
   --primary-dark:  color-mod(var(--color-primary) shade(15%));
 
@@ -40,60 +40,103 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 }
 /*------------------------------------------------------------------*/
 
-* {
+#root {
   background-color: var(--primary);
-  color: var(--white)
+  color: var(--white);
+
+  background-image: url(../Assets/Noise\ &\ Texture.svg);
+  background-repeat: repeat;
 }
 
 button{
+  display: flex;
+  align-items: center;
   justify-content:center;
-  padding: 4px;
+  padding: 4px 12px 4px 8px;
+
   border-style: solid;
   border-color: var(--white);
   border-radius: 100px;
-  padding: 4px 12px 4px 8px;
+  background: none;
+}
+
+button > img {
+  height: 20px;
+  width: auto;
+  margin-right: 4px;
 }
 
 /*----------------------------- TOP NAV ----------------------------*/
 #TopNav {
   box-sizing: border-box;
   position: fixed;
-  width: 100%;
-  padding: 10px 15px;
+  width: 100vw;
+  padding: 3vh 8vw;
 }
 
-#TopNav, .MenuContainer, .Availability, button {
+#TopNav, .MenuContainer, .Availability {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.MenuContainer {
-  gap: 12px;
-}
-
 .StatusIndicator {
-  height: 10px;
-  width: 10px;
-  margin-right: 4px;
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-right: 0.5rem;
 
   background-color: var(--success);
-  border-radius: 100%;
+  border-radius: 50%;
   border-style: none;
 }
 
-.btn-icon {
-  height: 20px;
-  width: auto;
-  margin-right: 4px;
+.MenuContainer {
+  gap: 10px;
 }
 /*----------------------------- LANDING ----------------------------*/
-#section {
+#LandingSection {
   display: flex;
+  flex-direction: column;
+
+  padding-left: 5vw;
+  width: 100vw;
+  height: 90vh;
+  gap: 0.5vh;
+
+  padding-top: 20vh;
+}
+
+#LandingSection > p {
+  width: 75vw;
+}
+
+.contacts {
+  display: flex;
+  gap: 4vw;
+}
+
+.contacts img {
+  width: 40px;
+  height: auto;
+}
+
+.quote {
+  margin-top: 5vh;
+  margin-right: 15vw;
+}
+
+.quote > h3 {
+  width: 60vw;
+  margin-bottom: 1rem;
+}
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
-  width: 100vw;
-  height: 100vh;
+  height: 10vh;
 }
 /*---------------------------- PROJECTS ----------------------------*/
 #ProjectContainer {
