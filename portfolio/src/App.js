@@ -1,29 +1,16 @@
-import logo from './Assets/logo.svg';
-import btnIcon from './Assets/btn-icon.svg';
-import './App.css';
+import './Styles/Style.css';
 
-function Header() { 
-	return (
-    <div className="Header rubik-S2">
-      <img src={logo} className="Logo" alt="Logo" />
-      <div className="Menu">
-        <div className="Availability">
-          <img className="Status" alt=""/>
-          <p>AVAILABLE</p>
-        </div>
-        <button className="btn-pointer">
-          <img src={btnIcon} className="btn-icon" alt=""/>
-          ABOUT ME
-        </button>
-      </div>
-    </div>
-	);
-}
+import Projects from './Components/Projects.js';
+import TopNav from './Components/TopNav.js';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <TopNav />
+      <section id="LandingSection">
+        <h1>asd</h1>
+      </section>
+      <Projects />
     </div>
   );
 }
