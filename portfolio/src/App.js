@@ -5,6 +5,7 @@ import './Styles/Style.css';
 import Projects from './Components/Projects.js';
 import TopNav from './Components/TopNav.js';
 import ContactButtons from './Components/ContactButtons.js';
+import About from './Components/About.js';
 
 function App() {
   return (
@@ -28,11 +29,12 @@ function App() {
       </div>
 
       <div className="scrollIndicator">
-        <h2>PROJECTS</h2>
+        <h2>FEATURED PROJECTS</h2>
         <img src={arrowDown} alt=""/>
       </div>
 
       <Projects />
+      <About />
     </div>
   );
 }
