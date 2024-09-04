@@ -1,70 +1,46 @@
 import '../Styles/Style.css';
+import Carousel from './Carousel';
 
-
-import React, { useEffect, useRef, useState } from 'react';
-
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from 'react';
 
 function Projects() {
-  const textRef = useRef(null);
-  const sectionRef = useRef(null);
-
-
-  const [sticky, setSticky] = useState(false);
-  const [atCenter, setAtCenter] = useState(false);
-
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const top = sectionRef.current.getBoundingClientRect().top;
-      const bottom = sectionRef.current.getBoundingClientRect().bottom;
-      const viewportHeight = window.innerHeight;
-
-
-      if (top <= viewportHeight && bottom >= viewportHeight ) {
-        setSticky(true);
-        setAtCenter(true);
-      } else {
-        setSticky(false);
-        setAtCenter(false);
-      }
-    };
-
-
-    window.addEventListener('scroll', handleScroll);
-
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const handleResize = () => setViewportHeight(window.innerHeight);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const { scrollY } = useScroll();
 
+  function toPx (val) { return val * viewportHeight / 100; }
+
+  const opacity = useTransform(
+    scrollY,
+    [toPx(50), toPx(90), toPx(480), toPx(520)],
+    [0, 1, 1, 0] 
+  );
+
+  const scale = useTransform(
+    scrollY,
+    [toPx(50), toPx(90), toPx(480), toPx(520)],
+    ["95%", "100%", "100%", "95%"] 
+  );
 
   return (
-    <section id="ProjectSection" ref={sectionRef}>
-      <div className={`sticky-text ${sticky ? 'sticky' : ''} ${atCenter ? 'center' : ''}`} ref={textRef}>
+    <section id="ProjectSection">
+      <motion.div className={'sticky-text'} style={{opacity, scale}}>
           <h1>WEBSITES AND APPS</h1>
           <p>Websites and apps designed and/or developed by me.</p>
-      </div>
+      </motion.div>
       <div className="Projects">
-        <div>
-          <p>Scrollable content goes here...</p>
-          <p>More content...</p>
-          <p>Even more content...</p>
-        </div>
-        <div>
-          <p>Scrollable content goes here...</p>
-          <p>More content...</p>
-          <p>Even more content...</p>
-        </div>
-        <div>
-          <p>Scrollable content goes here...</p>
-          <p>More content...</p>
-          <p>Even more content...</p>
-        </div>
+        <Carousel />
+        <Carousel />
+        <Carousel />
       </div>
     </section>
   );
 }
-
 
 export default Projects;

@@ -73,6 +73,7 @@ button > img {
   position: fixed;
   width: 100vw;
   padding: 3vh 8vw;
+  z-index: 1;
 }
 
 #TopNav, .MenuContainer, .Availability {
@@ -101,7 +102,7 @@ button > img {
 
   padding-left: 5vw;
   width: 100vw;
-  height: 90vh;
+  height: 80vh;
   gap: 0.5vh;
 
   padding-top: 20vh;
@@ -137,25 +138,22 @@ button > img {
   justify-content: center;
   align-items: center;
 
-  height: 10vh;
+  height: 20vh;
 }
 /*---------------------------- PROJECTS ----------------------------*/
 #ProjectSection {
-  height: 200vh;
+  height: 500vh;
   position: relative;
   padding: 10vh 1vw;
 }
-
 
 .sticky-text {
   position: sticky;
   top: 50%;
   transform: translateY(-50%);
 
-
   display: flex;
   flex-direction: column;
-
 
   width: 100%;
   padding: 0vh 10vw;
@@ -165,30 +163,26 @@ button > img {
   text-align: center;
 }
 
-
-/* .sticky-text.sticky {
-  position: sticky;
-  top: 50%;
-}
-
-
-.sticky-text.center {
-  position: fixed;
-  top: 50%;
-} */
-
-
 .content {
   position: relative;
   z-index: 1; /* Ensure content scrolls over the background text */
   padding: 20px;
 }
 
+/*------------------------ CAROUSEL & CARD ------------------------*/
 
 .Projects > div {
-  margin: 50vh 5vw;
-  background-color: #FAFAFA;
+  margin: 30vh 5vw;
+  stroke: var(--white);
 }
+
+.cardDisplay {
+  padding: 5vh 5vw;
+  width: 100%;
+  height: 25vh;
+  background-color: #c4c2c2;
+}
+
 /*----------------------------- ABOUT -----------------------------*/
 #AboutSec {
   height: 100vh;
