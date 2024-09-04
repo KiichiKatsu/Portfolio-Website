@@ -12,7 +12,7 @@ function TopNav() {
           <img className="StatusIndicator" alt=""/>
           <h5>AVAILABLE</h5>
         </div>
-        <button>
+        <button className="btn-aboutme">
           <img src={btnIcon} alt=""/>
           <h5>ABOUT ME</h5>
         </button>

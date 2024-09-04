@@ -46,14 +46,13 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 
   background-image: url(../Assets/Noise\ &\ Texture.svg);
   background-repeat: repeat;
-  scroll-behavior: smooth;
 }
 
 button{
   display: flex;
   align-items: center;
   justify-content:center;
-  padding: 6px 12px 6px 7px;
+  padding: 4px 12px 4px 8px;
 
   border-style: solid;
   border-color: var(--white);
@@ -138,57 +137,17 @@ button > img {
   align-items: center;
 
   height: 10vh;
-  background-color: var(--primary);
 }
-
 /*---------------------------- PROJECTS ----------------------------*/
-#ProjectSection {
-  height: 200vh;
-  position: relative;
-  padding: 10vh 1vw;
-}
-
-.sticky-text {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  padding: 0vh 10vw;
-  align-items: center;
-  
-  z-index: -1; 
-  text-align: center;
-}
-
-/* .sticky-text.sticky {
-  position: sticky;
-  top: 50%;
-}
-
-.sticky-text.center {
-  position: fixed;
-  top: 50%;
-} */
-
-.content {
-  position: relative;
-  z-index: 1; /* Ensure content scrolls over the background text */
-  padding: 20px;
-}
-
-.Projects > div {
-  margin: 50vh 5vw;
-  background-color: #FAFAFA;
-}
-/*----------------------------- ABOUT -----------------------------*/
-#AboutSec {
+#ProjectContainer {
+  background-color: aliceblue;
+  width: 100vw;
   height: 100vh;
-  background-color: var(--white);
+
+  padding-top: 100px;
 }
+
+/*----------------------------- ABOUT -----------------------------*/
 
 /* Large phones */
 @media only screen and (min-width: 640px) {}
