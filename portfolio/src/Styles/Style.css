@@ -150,7 +150,7 @@ button > img {
 #ProjectSection {
   height: 500vh;
   position: relative;
-  padding: 10vh 1vw;
+  padding: 0vh 1vw;
 }
 
 .sticky-text {
