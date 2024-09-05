@@ -1,6 +1,7 @@
 import arrowDown from './Assets/ArrowDown.svg';
 
 import './Styles/Style.css';
+import React, {useRef} from 'react';
 
 import Projects from './Components/Projects.js';
 import TopNav from './Components/TopNav.js';
@@ -8,9 +9,15 @@ import ContactButtons from './Components/ContactButtons.js';
 import About from './Components/About.js';
 
 function App() {
+  const aboutRef = useRef(null);
+
+  const scrollToAbout = () => {
+    aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="App">
-      <TopNav />
+      <TopNav onClick={scrollToAbout}/>
       
       <div id="LandingSection">
         <div>
@@ -35,7 +42,7 @@ function App() {
 
       <Projects />
 
-      <About />
+      <About ref={aboutRef}/>
     </div>
   );
 }

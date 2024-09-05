@@ -72,11 +72,17 @@ button > img {
   box-sizing: border-box;
   position: fixed;
   width: 100vw;
-  padding: 3vh 8vw;
-  z-index: 1;
+  padding: 5vh 8vw 3vh 8vw;
+  transform: translateY(2vh);
+  z-index: 10;
+  background: linear-gradient(
+    to bottom, 
+    rgba(26, 26, 26, 100), 
+    rgba(26, 26, 26, 0)
+  );
 }
 
-#TopNav, .MenuContainer, .Availability {
+#TopNav > nav, .MenuContainer, .Availability {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -149,16 +155,15 @@ button > img {
 
 .sticky-text {
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40vh;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   width: 100%;
-  padding: 0vh 10vw;
-  align-items: center;
- 
+  padding: 0vh 8vw;
+  
   z-index: -1;
   text-align: center;
 }
