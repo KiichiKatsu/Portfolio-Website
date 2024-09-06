@@ -1,61 +1,99 @@
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from 'react';
+
 import '../Styles/Style.css';
 import Carousel from './Carousel';
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from 'react';
-
 function Projects() {
-  const [sectionHeight, setHeight] = useState(0);
-  const [YPos, setYPos] = useState(0);
-
   const sectionRef = useRef(null);
-  const { scrollY } = useScroll();
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (sectionRef.current) {
-        const element = sectionRef.current.getBoundingClientRect();
-        setHeight(element.height); 
-        setYPos(element.top);
-      }
-    };
-
-    handleResize();
-
-    const resizeObserver = new ResizeObserver(() => { handleResize(); });
-    const currentRef = sectionRef.current;
-
-    if (currentRef) { resizeObserver.observe(currentRef); }
-
-    return () => {
-      if (currentRef) {
-        resizeObserver.unobserve(currentRef);
-      }
-    };
-  }, []); 
-
-  const start_EaseIn = YPos - window.innerHeight * 0.75;
-  const end_EaseIn = YPos;
-  const start_EaseOut = YPos + sectionHeight - window.innerHeight * 0.75;
-  const end_EaseOut = YPos + sectionHeight;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end center"]
+  });
 
   const opacity = useTransform(
-    scrollY,
-    [start_EaseIn, end_EaseIn, start_EaseOut, end_EaseOut],
-    [0, 1, 1, 0] 
+    scrollYProgress,
+    [0, 0.02, 0.98, 1],
+    [0, 1, 1, 0]
   );
 
   const scale = useTransform(
-    scrollY,
-    [start_EaseIn, end_EaseIn, start_EaseOut, end_EaseOut],
-    ["95%", "100%", "100%", "95%"] 
+    scrollYProgress,
+    [0, 0.02, 0.98, 1],
+    ["90%", "100%", "100%", "90%"]
   );
+
+  const Title = () => {
+    const duration = 0.01;
+
+    const displace_Top = useTransform(
+      scrollYProgress,
+      [(1 / 3) - duration, (1 / 3) + duration],
+      ["0%", "-100%"]
+    );
+    const displace_Middle = useTransform(
+      scrollYProgress,
+      [(1 / 3) - duration, (1 / 3) + duration, (2 / 3) - duration, (2 / 3) + duration],
+      ["100%", "0%", "0%", "-100%"]
+    );
+    const displace_Bottom = useTransform(
+      scrollYProgress,
+      [(2 / 3) - duration, (2 / 3) + duration],
+      ["100%", "0%"]
+    );
+
+    const opacity_Top = useTransform(
+      scrollYProgress,
+      [(1 / 3) - duration, (1 / 3) + duration],
+      ["100%", "0%"]
+    );
+    const opacity_Middle = useTransform(
+      scrollYProgress,
+      [(1 / 3) + duration, (1 / 3) + (duration * 2) , (2 / 3) - duration, (2 / 3) + duration],
+      ["0%", "100%", "100%", "0%"]
+    );
+    const opacity_Bottom = useTransform(
+      scrollYProgress,
+      [(2 / 3) + duration, (2 / 3) + (duration * 2)],
+      ["0%", "100%"]
+    );
+
+    return (
+      <>
+        <h3>PROJECTS</h3>
+        <motion.h1 className="projectTitle">
+          <div>
+            <motion.span style={{ y: displace_Top }}>DESIGN WORK</motion.span>
+          </div>
+          <div className="hiddenTitle">
+            <motion.span style={{ y: displace_Middle }}>HCI RESEARCH</motion.span>
+          </div>
+          <div className="hiddenTitle">
+            <motion.span style={{ y: displace_Bottom }}>OTHER PROJECTS</motion.span>
+          </div>
+        </motion.h1>
+        <motion.p className="projectTitle">
+          <div>
+            <motion.span style={{ opacity: opacity_Top }}>Work designed and/or developed by me</motion.span>
+          </div>
+          <div className="hiddenTitle">
+            <motion.span style={{ opacity: opacity_Middle }}>My HCI Research Papers and Theses</motion.span>
+          </div>
+          <div className="hiddenTitle">
+            <motion.span style={{ opacity: opacity_Bottom }}>Hobby and Practice Projects</motion.span>
+          </div>
+        </motion.p>
+      </>
+
+    )
+  }
 
   return (
     <section id="ProjectSection" ref={sectionRef}>
-      <motion.div className={'sticky-text'} style={{opacity, scale}}>
-          <h1>WEBSITES AND APPS</h1>
-          <p>Websites and apps designed and/or developed by me.</p>
+      <motion.div className='titleContainer' style={{ opacity, scale }}>
+        <motion.div>
+          <Title />
+        </motion.div>
       </motion.div>
       <div className="Projects">
         <Carousel />

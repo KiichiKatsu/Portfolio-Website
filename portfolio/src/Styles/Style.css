@@ -148,37 +148,56 @@ button > img {
 }
 /*---------------------------- PROJECTS ----------------------------*/
 #ProjectSection {
-  height: 500vh;
+  height: 1000vh;
   position: relative;
-  padding: 0vh 1vw;
 }
 
-.sticky-text {
-  position: sticky;
+.titleContainer {
+  position: fixed;
   top: 40vh;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 100%;
-  padding: 0vh 8vw;
-  
+  width: 100vw;
   z-index: -1;
-  text-align: center;
+  text-align: start;
 }
 
-.content {
+.projectTitle{
   position: relative;
-  z-index: 1; /* Ensure content scrolls over the background text */
-  padding: 20px;
+  width: 80vw;
+  display: block; 
+  overflow: hidden;
+  white-space: pre;
+}
+
+.hiddenTitle {
+  position: absolute;
+  width: 100%;
+  inset: 0;
+}
+
+.projectTitle > div > span{
+  display: inline-block;
+  width: 100%;
+}
+
+.Projects {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  height: 100%;
+  padding: 5vh 0;
 }
 
 /*------------------------ CAROUSEL & CARD ------------------------*/
-
 .Projects > div {
-  margin: 30vh 5vw;
-  stroke: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cardDisplay {
