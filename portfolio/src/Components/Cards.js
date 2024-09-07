@@ -2,7 +2,7 @@ import '../Styles/Style.css';
 
 import GitHubIcon from '../Assets/GitHub.svg';
 
-function Card() {
+function Cards() {
     return (
         <div className="Card">
             <div className="cardDisplay">
@@ -14,4 +14,4 @@ function Card() {
     )
 }
 
-export default Card;
+export default Cards;

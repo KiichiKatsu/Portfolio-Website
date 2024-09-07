@@ -1,13 +1,19 @@
 import '../Styles/Style.css';
 
-import Card from './Card.js'
+import Cards from './Cards.js'
 
 function Carousel() {
     return (
-        <div>
-            <Card />
-            <Card />
-            <Card />
+        <div className="Projects">
+            <div>
+                <Cards />
+            </div>
+            <div>
+                <Cards />
+            </div>
+            <div>
+                <Cards />
+            </div>
         </div>
     )
 }

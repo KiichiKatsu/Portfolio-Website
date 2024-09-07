@@ -69,7 +69,7 @@ function Projects() {
             <motion.span style={{ y: displace_Middle }}>HCI RESEARCH</motion.span>
           </div>
           <div className="hiddenTitle">
-            <motion.span style={{ y: displace_Bottom }}>OTHER PROJECTS</motion.span>
+            <motion.span style={{ y: displace_Bottom }}>OTHER WORK</motion.span>
           </div>
         </motion.h1>
         <motion.p className="projectTitle">
@@ -84,7 +84,6 @@ function Projects() {
           </div>
         </motion.p>
       </>
-
     )
   }
 
@@ -95,11 +94,7 @@ function Projects() {
           <Title />
         </motion.div>
       </motion.div>
-      <div className="Projects">
-        <Carousel />
-        <Carousel />
-        <Carousel />
-      </div>
+      <Carousel />
     </section>
   );
 }

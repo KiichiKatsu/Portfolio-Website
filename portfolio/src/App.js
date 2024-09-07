@@ -36,7 +36,8 @@ function App() {
       </div>
 
       <div className="scrollIndicator">
-        <h2>FEATURED PROJECTS</h2>
+        <img src={arrowDown} alt=""/>
+        <h4>FEATURED PROJECTS</h4>
         <img src={arrowDown} alt=""/>
       </div>
 
