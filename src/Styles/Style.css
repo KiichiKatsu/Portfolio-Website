@@ -248,7 +248,6 @@ button > img {
   margin-top: 1vh;
 
   cursor: grab;
-  touch-action: none;
 }
 
 .drawerHandle > button:active {
