@@ -71,7 +71,7 @@ button > img {
 #TopNav {
   box-sizing: border-box;
   position: fixed;
-  width: 100vw;
+  width: 100%;
   padding: 5vh 8vw 3vh 8vw;
   transform: translateY(2vh);
   z-index: 10;
@@ -106,12 +106,12 @@ button > img {
   display: flex;
   flex-direction: column;
 
+  width: 100%;
   padding-left: 5vw;
-  width: 100vw;
   height: 80vh;
   gap: 0.5vh;
 
-  padding-top: 20vh;
+  padding-top: 15vh;
 }
 
 #LandingSection > p {
@@ -139,7 +139,6 @@ button > img {
 }
 
 .scrollIndicator {
-  width: 95vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,6 +207,62 @@ button > img {
   background-color: #c4c2c2;
 }
 
+.drawerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(26, 26, 26, 0.753);
+  z-index: 5;
+}
+
+.drawerContainer > div {
+  position: absolute;
+  bottom: 0%;
+  height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4vh 4vh 0vh 0vh;
+
+  background-color: #222222;
+}
+
+.drawerHandle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+}
+
+.drawerHandle > button {
+  background-color: #939393;
+  border-style: none;
+  width: 10%;
+  margin-top: 1vh;
+
+  cursor: grab;
+  touch-action: none;
+}
+
+.drawerHandle > button:active {
+  cursor: grabbing;
+}
+
+.drawerContent {
+  position: relative;
+  z-index: 0;
+  height: 100%;
+  overflow-y: scroll;
+
+  padding: 5vh 5vw 5vh 5vw;
+}
 /*----------------------------- ABOUT -----------------------------*/
 #AboutSec {
   height: 100vh;
