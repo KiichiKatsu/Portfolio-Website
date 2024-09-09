@@ -45,10 +45,10 @@ function Cards({ data }) {
             {data.map((item, index) => (
                 <div className="Card" key={index} onClick={() => handleCardClick(index)}>
                     <div className="cardDisplay">
-                        <img src={item[0]} alt={item[1]} />
+                        <img src={item.banner} alt={item.projectTitle} />
                     </div>
-                    <h3>{item[1]}</h3>
-                    <p className="light">{item[2]}</p>
+                    <h3>{item.projectTitle}</h3>
+                    <p className="light">{item.projectSubtitle}</p>
 
                     {activeIndex === index && (
                         <motion.div
@@ -74,68 +74,15 @@ function Cards({ data }) {
                                 dragElastic={{ top: 0, bottom: 0.5 }}
                             >
                                 <div className='drawerHandle'>
-                                    <button
-                                        onPointerDown={(e) => controls.start(e)}
-                                    />
+                                    <button onPointerDown={(e) => controls.start(e)} />
                                 </div>
                                 <div className='drawerContent'>
-                                    <h1>DRAWER {item[1]}</h1>
-                                    <h2>
-                                        Laudantium corrupti neque rerum labore tempore sapiente. Quos, nobis
-                                        dolores. Esse fuga, cupiditate rerum soluta magni numquam nemo
-                                        aliquid voluptate similique deserunt!
-                                    </h2>
-                                    <h2>
-                                        Rerum inventore provident laboriosam quo facilis nisi voluptatem
-                                        quam maxime pariatur. Velit reiciendis quasi sit magni numquam quos
-                                        itaque ratione, fugit adipisci atque est, tenetur officiis explicabo
-                                        id molestiae aperiam? Expedita quidem inventore magni? Doloremque
-                                        architecto mollitia, dicta, fugit minima velit explicabo sapiente
-                                        beatae fugiat accusamus voluptatum, error voluptatem ab asperiores
-                                        quo modi possimus.
-                                    </h2>
-                                    <h2>
-                                        Laudantium corrupti neque rerum labore tempore sapiente. Quos, nobis
-                                        dolores. Esse fuga, cupiditate rerum soluta magni numquam nemo
-                                        aliquid voluptate similique deserunt!
-                                    </h2>
-                                    <h2>
-                                        Rerum inventore provident laboriosam quo facilis nisi voluptatem
-                                        quam maxime pariatur. Velit reiciendis quasi sit magni numquam quos
-                                        itaque ratione, fugit adipisci atque est, tenetur officiis explicabo
-                                        id molestiae aperiam? Expedita quidem inventore magni? Doloremque
-                                        architecto mollitia, dicta, fugit minima velit explicabo sapiente
-                                        beatae fugiat accusamus voluptatum, error voluptatem ab asperiores
-                                        quo modi possimus.
-                                    </h2>
-                                    <h2>
-                                        Laudantium corrupti neque rerum labore tempore sapiente. Quos, nobis
-                                        dolores. Esse fuga, cupiditate rerum soluta magni numquam nemo
-                                        aliquid voluptate similique deserunt!
-                                    </h2>
-                                    <h2>
-                                        Rerum inventore provident laboriosam quo facilis nisi voluptatem
-                                        quam maxime pariatur. Velit reiciendis quasi sit magni numquam quos
-                                        itaque ratione, fugit adipisci atque est, tenetur officiis explicabo
-                                        id molestiae aperiam? Expedita quidem inventore magni? Doloremque
-                                        architecto mollitia, dicta, fugit minima velit explicabo sapiente
-                                        beatae fugiat accusamus voluptatum, error voluptatem ab asperiores
-                                        quo modi possimus.
-                                    </h2>
-                                    <h2>
-                                        Laudantium corrupti neque rerum labore tempore sapiente. Quos, nobis
-                                        dolores. Esse fuga, cupiditate rerum soluta magni numquam nemo
-                                        aliquid voluptate similique deserunt!
-                                    </h2>
-                                    <h2>
-                                        Rerum inventore provident laboriosam quo facilis nisi voluptatem
-                                        quam maxime pariatur. Velit reiciendis quasi sit magni numquam quos
-                                        itaque ratione, fugit adipisci atque est, tenetur officiis explicabo
-                                        id molestiae aperiam? Expedita quidem inventore magni? Doloremque
-                                        architecto mollitia, dicta, fugit minima velit explicabo sapiente
-                                        beatae fugiat accusamus voluptatum, error voluptatem ab asperiores
-                                        quo modi possimus.
-                                    </h2>
+                                    <h1>{item.projectTitle}</h1>
+                                    <p>{item.projectDesc}</p>
+                                    {/* Mapping over the images array */}
+                                    {item.images.map((image, idx) => (
+                                        <img key={idx} src={image[0]} alt={image[1]} />
+                                    ))}
                                 </div>
                             </motion.div>
 
