@@ -15,6 +15,7 @@
 
     /* Colours */
     --primary:           #1A1A1A;
+    --primary-light:     #373737;
     --secondary:         #FAFAFA;
     --secondary-dark:    #E5E5E5;
 }

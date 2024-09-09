@@ -1,125 +1,124 @@
 import '../Styles/Style.css';
 import Cards from './Cards.js'
 
-import GitHubIcon from '../Assets/GitHub.svg';
+import ExampleBanner from '../Assets/Example Banner.png';
+
+// Antipodean App
+import AntipodeanAppBanner from '../Assets/Antipodean App/AntipodeanApp Banner.png';
+import AntiApp_Home from '../Assets/Antipodean App/Home.png';
+import AntiApp_Menu from '../Assets/Antipodean App/Menu.png';
+import AntiApp_AddToOrder from '../Assets/Antipodean App/AddtoOrder.png';
+import AntiApp_OrderSummary from '../Assets/Antipodean App/OrderSummary.png';
+import AntiApp_Confirmation from '../Assets/Antipodean App/OrderConfirmation.png';
+
 
 function Carousel() {
-    // {
-    //     banner: GitHubIcon, 
-    //     projectTitle: 'Example Project', 
-    //     projectSubtitle: 'Incomplete / Website / Designer', 
-    //     projectDesc: 'A short meaningful description of the project.',
-    //     images: [
-    //         [GitHubIcon, 'Alt 1'],
-    //         [GitHubIcon, 'Alt 2'],
-    //         [GitHubIcon, 'Alt 3']
-    //     ]
-    // }
-
     const Design = [
         {
-            banner: GitHubIcon, 
-            projectTitle: 'Title 1', 
-            projectSubtitle: 'Subtitle 1', 
-            projectDesc: 'Some Description',
+            banner: AntipodeanAppBanner, 
+            projectTitle: 'Antipodean Cafe App', 
+            projectSubtitle: 'Complete / Mobile App Concept / Designer', 
+            projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [AntiApp_Home, 'Home Screen'],
+                [AntiApp_Menu, 'Menu Screen'],
+                [AntiApp_AddToOrder, 'Add to Order Screen'],
+                [AntiApp_OrderSummary, 'Order Summary Screen'],
+                [AntiApp_Confirmation, 'Order Confirmation Screen']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         }
     ];
 
     const Research = [
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         }
     ];
 
     const Other = [
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         },
         {
-            banner: GitHubIcon, 
+            banner: ExampleBanner, 
             projectTitle: 'Example Project', 
             projectSubtitle: 'Incomplete / Website / Designer', 
             projectDesc: 'A short meaningful description of the project.',
             images: [
-                [GitHubIcon, 'Alt 1'],
-                [GitHubIcon, 'Alt 2'],
-                [GitHubIcon, 'Alt 3']
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
             ]
         }
     ];
