@@ -15,6 +15,22 @@ function App() {
   const aboutRef = useRef(null);
   const [scope, animate] = useAnimate();
 
+  const title = "Kiichiro's Portfolio";
+  const blurTitle = "Your Best Candidate (Kiichiro.T)";
+
+  const onBlur = () => { document.title = blurTitle; }
+  const onFocus = () => { document.title = title; }
+
+  useEffect (() => {
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+
+    return () => {
+      window.addEventListener("blur", onBlur);
+      window.addEventListener("focus", onFocus);
+    }
+  }, []);
+
   const scrollToAbout = () => {
     aboutRef.current.scrollIntoView({ behavior: 'smooth' });
   };
@@ -29,7 +45,6 @@ function App() {
       [".quote h3",  { opacity: [0, 1] }, {duration: 1}],
       [".quote p",  { opacity: [0, 1] }, {duration: 1}],
     ]
-    
     animate(sequence);
   }, [animate, scope])
 
