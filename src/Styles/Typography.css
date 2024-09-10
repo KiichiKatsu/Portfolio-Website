@@ -98,3 +98,7 @@ p {
     -webkit-text-stroke: 2px var(--secondary); 
     paint-order: stroke fill;
 }
+
+.keepWhiteSpace {
+    white-space: pre;
+}
