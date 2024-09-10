@@ -13,13 +13,13 @@ function Projects() {
 
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.02, 0.98, 1],
+    [0, 0.05, 0.95, 1],
     [0, 1, 1, 0]
   );
 
   const scale = useTransform(
     scrollYProgress,
-    [0, 0.02, 0.98, 1],
+    [0, 0.05, 0.95, 1],
     ["90%", "100%", "100%", "90%"]
   );
 

@@ -70,7 +70,8 @@ button > img {
 /*----------------------------- TOP NAV ----------------------------*/
 #TopNav {
   box-sizing: border-box;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   padding: 5vh 8vw 3vh 8vw;
   transform: translateY(2vh);
@@ -108,10 +109,10 @@ button > img {
 
   width: 100%;
   padding-left: 5vw;
-  height: 80vh;
+  height: 70vh;
   gap: 0.5vh;
 
-  padding-top: 15vh;
+  padding-top: 5vh;
 }
 
 #LandingSection > p {
@@ -120,7 +121,7 @@ button > img {
 
 .contacts {
   display: flex;
-  gap: 4vw;
+  gap: 2vw;
 }
 
 .contacts img {
@@ -148,6 +149,7 @@ button > img {
 /*---------------------------- PROJECTS ----------------------------*/
 #ProjectSection {
   position: relative;
+  padding-top: 10vh;
 }
 
 .titleContainer {
@@ -254,10 +256,9 @@ button > img {
 
 .drawerHandle > button {
   background-color: #939393;
-  border-style: none;
+  border-width: 1vh;
+  border-color: #222222;;
   width: 10%;
-  margin-top: 1vh;
-
   cursor: grab;
 }
 
