@@ -1,4 +1,5 @@
 import arrowDown from './Assets/ArrowDown.svg';
+import logo from './Assets/logo.svg';
 
 import './Styles/Style.css';
 import React, {useRef, useEffect} from 'react';
@@ -8,6 +9,7 @@ import Projects from './Components/Projects.js';
 import TopNav from './Components/TopNav.js';
 import ContactButtons from './Components/ContactButtons.js';
 import About from './Components/About.js';
+import FAQ from './Components/FAQ.js';
 
 function App() {
   const aboutRef = useRef(null);
@@ -70,8 +72,13 @@ function App() {
       </div>
 
       <Projects />
-
       <About ref={aboutRef}/>
+      <FAQ />
+      
+      <footer>
+        <img src={logo} alt="Logo" />
+        <p className="caption">Designed and Developed By Kiichiro</p>
+      </footer>
     </div>
   );
 }
