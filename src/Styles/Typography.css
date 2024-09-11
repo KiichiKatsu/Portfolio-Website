@@ -102,3 +102,7 @@ p {
 .keepWhiteSpace {
     white-space: pre;
 }
+
+.blackText {
+    color: var(--primary);
+}

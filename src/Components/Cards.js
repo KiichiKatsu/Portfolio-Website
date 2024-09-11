@@ -15,7 +15,7 @@ function Cards({ data }) {
     const dragX = useMotionValue(0);
 
     const AUTO_DELAY = 1000 * 15;
-    const DRAG_BUFFER = 50;
+    const DRAG_BUFFER = 30;
 
     const handleCardClick = (index) => { setActiveIndex(index); };
 
