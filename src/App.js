@@ -72,8 +72,10 @@ function App() {
           ))}
         </p>
         
-        <ContactButtons />
-
+        <div className='contactContainer'>
+          <ContactButtons />
+        </div>
+        
         <section className="quote">
           <motion.h3 initial={{opacity: 0}}>“Society grows great when the old plant trees in whose shade they shall never sit”</motion.h3>
           <motion.p initial={{opacity: 0}}>I believe that the best user experiences are hidden in the subtleties that only the designers and developers know exists, yet selflessly never get to truly enjoy themselves.</motion.p>
