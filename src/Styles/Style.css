@@ -328,7 +328,7 @@ button > img {
 
 /*----------------------------- ABOUT -----------------------------*/
 #AboutSec {
-  margin: 0vh 2vw 3vh 2vw;
+  margin: 0vh 5vw 3vh 5vw;
 }
 
 .shortStory {
@@ -366,7 +366,7 @@ button > img {
 }
 /*------------------------------ FAQ ------------------------------*/
 #FAQSec {
-  margin: 0vh 2vw 5vh 2vw;
+  margin: 0vh 5vw 5vh 5vw;
 }
 
 #FAQSec > h2 {
