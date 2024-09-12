@@ -61,17 +61,19 @@ function Projects() {
     return (
       <>
         <h3>PROJECTS</h3>
+        
         <motion.h1 className="projectTitle">
           <div>
             <motion.span style={{ y: displace_Top }}>DESIGN WORK</motion.span>
           </div>
-          <div className="hiddenTitle">
+          <div  className="hiddenTitle">
             <motion.span style={{ y: displace_Middle }}>HCI RESEARCH</motion.span>
           </div>
           <div className="hiddenTitle">
             <motion.span style={{ y: displace_Bottom }}>OTHER WORK</motion.span>
           </div>
         </motion.h1>
+
         <motion.p className="projectTitle keepWhiteSpace">
           <span>
             <motion.span style={{ opacity: opacity_Top }}>Work designed and/or developed by me</motion.span>
