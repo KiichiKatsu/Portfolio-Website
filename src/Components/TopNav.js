@@ -1,10 +1,10 @@
-import logo from '../Assets/logo.svg';
-import btnIcon from '../Assets/btn-icon.svg';
+import { useState, useRef } from 'react';
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 import '../Styles/Style.css';
 
-import { useState, useRef } from 'react';
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import logo from '../Assets/logo.svg';
+import btnIcon from '../Assets/btn-icon.svg';
 
 function TopNav({onClick}) {
   const [isHidden, setHidden] = useState(false);
@@ -28,16 +28,16 @@ function TopNav({onClick}) {
           visible: { y:"-20%" }
         }}
       >
-        <nav className="Subtitle2">
+        <nav>
           <img src={logo} alt="Logo" />
           <div className="MenuContainer">
             <div className="Availability">
               <img className="StatusIndicator" alt=""/>
-              <h5>AVAILABLE</h5>
+              <h5 className='noLineHeight'>AVAILABLE</h5>
             </div>
             <button onClick={onClick}>
               <img src={btnIcon} alt=""/>
-              <h5>ABOUT ME</h5>
+              <h5 className='noLineHeight'>ABOUT ME</h5>
             </button>
           </div>
         </nav>

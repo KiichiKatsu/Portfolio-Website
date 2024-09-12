@@ -1,7 +1,8 @@
-import '../Styles/Style.css';
 import React, { useEffect, useState } from 'react';
 import { motion, useDragControls, useMotionValue, useAnimate } from "framer-motion";
 import useMeasure from "react-use-measure";
+
+import '../Styles/Style.css';
 
 function Cards({ data }) {
     const [activeIndex, setActiveIndex] = useState(null);

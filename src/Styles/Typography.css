@@ -106,3 +106,13 @@ p {
 .blackText {
     color: var(--primary);
 }
+
+.noLineHeight {
+    line-height: 0%;
+}
+
+@media only screen and (min-width: 1100px) {
+    :root {
+        --text-base:    clamp(14px, 1.6rem, 21px); /* CHANGE THIS */
+    }
+}

@@ -72,16 +72,16 @@ function Projects() {
             <motion.span style={{ y: displace_Bottom }}>OTHER WORK</motion.span>
           </div>
         </motion.h1>
-        <motion.p className="projectTitle">
-          <div>
+        <motion.p className="projectTitle keepWhiteSpace">
+          <span>
             <motion.span style={{ opacity: opacity_Top }}>Work designed and/or developed by me</motion.span>
-          </div>
-          <div className="hiddenTitle">
+          </span>
+          <span className="hiddenTitle">
             <motion.span style={{ opacity: opacity_Middle }}>My HCI Research Papers and Theses</motion.span>
-          </div>
-          <div className="hiddenTitle">
+          </span>
+          <span className="hiddenTitle">
             <motion.span style={{ opacity: opacity_Bottom }}>Hobby and Practice Projects</motion.span>
-          </div>
+          </span>
         </motion.p>
       </>
     )
