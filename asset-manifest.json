@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio-Website/static/css/main.9fc5753a.css",
-    "main.js": "/Portfolio-Website/static/js/main.cbfc95fd.js",
+    "main.css": "/Portfolio-Website/static/css/main.84341036.css",
+    "main.js": "/Portfolio-Website/static/js/main.67bc1508.js",
     "static/js/453.1407b060.chunk.js": "/Portfolio-Website/static/js/453.1407b060.chunk.js",
     "static/media/AntipodeanApp Banner.png": "/Portfolio-Website/static/media/AntipodeanApp Banner.e0dbf5ceb5250876f809.png",
     "static/media/Menu.png": "/Portfolio-Website/static/media/Menu.e1cce9433cf36d87f3ed.png",
@@ -23,12 +23,12 @@
     "index.html": "/Portfolio-Website/index.html",
     "static/media/logo.svg": "/Portfolio-Website/static/media/logo.93546e6874e974931f4d8cc2a3ffc208.svg",
     "static/media/ArrowDown.svg": "/Portfolio-Website/static/media/ArrowDown.cbb9cd13150ffb8b72ff0aea521a63fa.svg",
-    "main.9fc5753a.css.map": "/Portfolio-Website/static/css/main.9fc5753a.css.map",
-    "main.cbfc95fd.js.map": "/Portfolio-Website/static/js/main.cbfc95fd.js.map",
+    "main.84341036.css.map": "/Portfolio-Website/static/css/main.84341036.css.map",
+    "main.67bc1508.js.map": "/Portfolio-Website/static/js/main.67bc1508.js.map",
     "453.1407b060.chunk.js.map": "/Portfolio-Website/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fc5753a.css",
-    "static/js/main.cbfc95fd.js"
+    "static/css/main.84341036.css",
+    "static/js/main.67bc1508.js"
   ]
 }
