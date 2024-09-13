@@ -121,8 +121,18 @@ function Cards({ data }) {
                                     <h3>{item.projectTitle}</h3>
                                     <p>{item.projectDesc}</p>
 
-                                    {/* Mapping over the images array */}
                                     <div className='carousel'>
+                                        <div className="carouselProgress">
+                                            {item.images.map((image, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => setImgIndex(idx)}
+                                                    style={{
+                                                        backgroundColor: `${idx === imgIndex ? "#FAFAFA" : "#1A1A1A"}`
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
                                         <motion.div
                                             drag="x"
                                             dragConstraints={{
@@ -135,6 +145,7 @@ function Cards({ data }) {
                                             }}
                                             transition={SPRING_OPTIONS}
                                             onDragEnd={onDragEnd}
+                                            className='carouselContainer'
                                         >
                                             {item.images.map((image, idx) => (
                                                 <div 
@@ -143,25 +154,18 @@ function Cards({ data }) {
                                                         backgroundImage: `url(${image[0]})`,
                                                         backgroundSize: "contain",
                                                         backgroundPosition: "center",
-                                                        backgroundRepeat: "no-repeat"
+                                                        backgroundRepeat: "no-repeat",
+                                                        aspectRatio: `${image[1] === "mobile" ? "9/16" : "16/9"}`,
+                                                        width: "100%",
+                                                        height: "auto",
+                                                        flexShrink: "0",
+                                                        maxHeight: "70vh"
                                                     }}
                                                     animate={{ scale: imgIndex === idx ? 0.95 : 0.85, }}
                                                     transition={SPRING_OPTIONS}
-                                                    className='carouselImage'
                                                 />
                                             ))}
                                         </motion.div>
-                                        <div className="carouselProgress">
-                                            {item.images.map((image, idx) => (
-                                                <button
-                                                    key={idx}
-                                                    onClick={() => setImgIndex(idx)}
-                                                    style={{
-                                                        backgroundColor: `${idx === imgIndex ? "#FAFAFA" : "#1A1A1A"}`
-                                                    }}
-                                                />
-                                            ))}
-                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
