@@ -115,7 +115,10 @@ function Cards({ data }) {
                                 dragElastic={{ top: 0, bottom: 0.5 }}
                             >
                                 <div className='drawerHandle'>
-                                    <button onPointerDown={(e) => controls.start(e)} />
+                                    <button 
+                                        onPointerDown={(e) => controls.start(e)} 
+                                        onClick={(e) => { e.stopPropagation(); closeOverlay(); }}
+                                    />
                                 </div>
                                 <div className='drawerContent'>
                                     <h3>{item.projectTitle}</h3>
