@@ -308,7 +308,6 @@ button > img {
 
 .carousel {
   position: relative;
-  overflow: hidden;
 
   height: 100%;
   padding: 2vh 5vw;

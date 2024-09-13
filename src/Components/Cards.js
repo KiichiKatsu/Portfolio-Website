@@ -151,6 +151,7 @@ function Cards({ data }) {
                                                 <div 
                                                     key={idx}
                                                     style={{ 
+                                                        position: "relative",
                                                         backgroundImage: `url(${image[0]})`,
                                                         backgroundSize: "contain",
                                                         backgroundPosition: "center",
