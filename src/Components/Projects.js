@@ -60,7 +60,7 @@ function Projects() {
 
     return (
       <>
-        <h3>PROJECTS</h3>
+        <h3>PROJECTS (WIP)</h3>
         
         <motion.h1 className="projectTitle">
           <div>

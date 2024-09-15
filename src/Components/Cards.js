@@ -115,59 +115,69 @@ function Cards({ data }) {
                                 dragElastic={{ top: 0, bottom: 0.5 }}
                             >
                                 <div className='drawerHandle'>
-                                    <button 
-                                        onPointerDown={(e) => controls.start(e)} 
+                                    <button
+                                        onPointerDown={(e) => controls.start(e)}
                                         onClick={(e) => { e.stopPropagation(); closeOverlay(); }}
                                     />
                                 </div>
                                 <div className='drawerContent'>
                                     <h3>{item.projectTitle}</h3>
                                     <p>{item.projectDesc}</p>
-
+                                    <div className="carouselProgress">
+                                        {item.images.map((image, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setImgIndex(idx)}
+                                                style={{
+                                                    backgroundColor: `${idx === imgIndex ? "#FAFAFA" : "#1A1A1A"}`
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
                                     <div className='carousel'>
-                                        <div className="carouselProgress">
-                                            {item.images.map((image, idx) => (
-                                                <button
-                                                    key={idx}
-                                                    onClick={() => setImgIndex(idx)}
-                                                    style={{
-                                                        backgroundColor: `${idx === imgIndex ? "#FAFAFA" : "#1A1A1A"}`
-                                                    }}
-                                                />
-                                            ))}
-                                        </div>
                                         <motion.div
                                             drag="x"
-                                            dragConstraints={{
-                                                left: 0,
-                                                right: 0
+                                            dragConstraints={{ left: 0, right: 0 }}
+                                            style={{
+                                                x: dragX,
+                                                width: `calc(${item.images.length} * 90vw)`,
+                                                height: "100%",
+                                                gap: "0",
                                             }}
-                                            style={{ x: dragX }}
-                                            animate={{
-                                                translateX: `-${imgIndex * 100}%`
-                                            }}
+                                            animate={{ translateX: `-${imgIndex * 90}vw` }}
                                             transition={SPRING_OPTIONS}
                                             onDragEnd={onDragEnd}
-                                            className='carouselContainer'
                                         >
                                             {item.images.map((image, idx) => (
-                                                <div 
+                                                <motion.div
                                                     key={idx}
-                                                    style={{ 
+                                                    style={{
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
+                                                        gap: "0",
+                                                        flex: "0 0 90vw",
+                                                        overflow: "hidden",
                                                         position: "relative",
-                                                        backgroundImage: `url(${image[0]})`,
-                                                        backgroundSize: "contain",
-                                                        backgroundPosition: "center",
-                                                        backgroundRepeat: "no-repeat",
-                                                        aspectRatio: `${image[1] === "mobile" ? "9/16" : "16/9"}`,
-                                                        width: "100%",
-                                                        height: "auto",
-                                                        flexShrink: "0",
-                                                        maxHeight: "70vh"
                                                     }}
                                                     animate={{ scale: imgIndex === idx ? 0.95 : 0.85, }}
                                                     transition={SPRING_OPTIONS}
-                                                />
+                                                >
+                                                    <img
+                                                        src={image[0]}
+                                                        alt={image[1]}
+                                                        draggable="false"
+                                                        style={{
+                                                            display: "block",
+                                                            maxWidth: "100%",
+                                                            maxHeight: "100%",
+                                                            width: "auto",
+                                                            height: "auto",
+                                                            objectFit: "contain"
+                                                        }}
+                                                    />
+                                                </motion.div>
                                             ))}
                                         </motion.div>
                                     </div>

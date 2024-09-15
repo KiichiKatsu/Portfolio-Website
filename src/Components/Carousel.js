@@ -19,13 +19,26 @@ import AntiWeb_2 from '../Assets/AntipodeanWebsite/AntipodeanWebSection2.png';
 import AntiWeb_3 from '../Assets/AntipodeanWebsite/AntipodeanWebSection3.png';
 import AntiWeb_4 from '../Assets/AntipodeanWebsite/AntipodeanWebSection4.png';
 
+// VR Controller
+import VRControllerBanner from '../Assets/AntipodeanWebsite/AntipodeanWebBanner.png';
+import VRController_low from '../Assets/VRControllerSketches/Low Fidelity.png';
+import VRController_mid from '../Assets/VRControllerSketches/Mid Fidelity.png';
+import VRController_high from '../Assets/VRControllerSketches/High Fidelity.png';
+import VRController_bib from '../Assets/VRControllerSketches/Bibliography.png';
+
 function Carousel() {
     const Design = [
         {
             banner: AntipodeanAppBanner,
-            projectTitle: 'Antipodean Cafe App',
+            projectTitle: 'Antipodean Cafe (App)',
             projectSubtitle: 'Complete / Mobile App Concept / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectDesc: `During the pandemic, I started many design projects—most of which I struggled to finish. The issue was that the subjects I chose were often fictional. 
+                          They lacked the tangible identity or novelty I could resonate with and feel motivated by. I obsess over details and am driven by the stories I want to 
+                          tell. I often asked questions about brand identity and user interaction that were—quite literally—up to my imagination. I believe that good design comes 
+                          from constraints—constraints that I couldn’t imagine due to my lack of familiarity or fieldwork in the industry. Antipodean was perfect for this. Antipodean 
+                          has rich philosophies and a brand image I could truly resonate with. As my mom was a co-owner, I was able to ask the questions I craved from fictional 
+                          subjects. Antipodean is a New Zealand coffee chain—striving for better coffee and better service. During the pandemic, Antipodean looked into developing 
+                          an ordering app to maintain their world-class hospitality while limiting interaction to keep everyone safe.`,
             images: [
                 [AntiApp_Home, 'mobile'],
                 [AntiApp_Menu, 'mobile'],
@@ -36,9 +49,9 @@ function Carousel() {
         },
         {
             banner: AntipodeanWebBanner,
-            projectTitle: 'Example Project',
+            projectTitle: 'Antipodean Cafe (Website)',
             projectSubtitle: 'Complete / Website Concept / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectDesc: `As an extention of the app, I decided to redesign Antipodean's website as well—realigning it to the identity and philosophies I gathered.`,
             images: [
                 [AntiWeb_Full, 'mobile'],
                 [AntiWeb_1, 'desktop'],
@@ -49,9 +62,20 @@ function Carousel() {
         },
         {
             banner: ExampleBanner,
-            projectTitle: 'Example Project',
-            projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectTitle: 'Unnamed Fitness App (WIP)',
+            projectSubtitle: 'In Progress / App / Designer',
+            projectDesc: `A meaningful description of the project.`,
+            images: [
+                [ExampleBanner, 'Alt 1'],
+                [ExampleBanner, 'Alt 2'],
+                [ExampleBanner, 'Alt 3']
+            ]
+        },
+        {
+            banner: ExampleBanner,
+            projectTitle: 'LocalEyes App (WIP)',
+            projectSubtitle: 'Complete / App / Designer',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
@@ -63,9 +87,9 @@ function Carousel() {
     const Research = [
         {
             banner: ExampleBanner,
-            projectTitle: 'Example Project',
-            projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectTitle: 'Thesis 1: VR Controller (WIP)',
+            projectSubtitle: 'Complete / Research and Development / Researcher and Developer',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
@@ -74,9 +98,9 @@ function Carousel() {
         },
         {
             banner: ExampleBanner,
-            projectTitle: 'Example Project',
-            projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectTitle: 'Thesis 2: SpinalLog (WIP)',
+            projectSubtitle: 'Complete / Research and Development / Researcher and Developer',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
@@ -84,14 +108,15 @@ function Carousel() {
             ]
         },
         {
-            banner: ExampleBanner,
-            projectTitle: 'Example Project',
-            projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            banner: VRControllerBanner,
+            projectTitle: 'VR Controller Sketches (WIP)',
+            projectSubtitle: 'Complete / Ideation / Researcher and Artist',
+            projectDesc: `A meaningful description of the project.`,
             images: [
-                [ExampleBanner, 'Alt 1'],
-                [ExampleBanner, 'Alt 2'],
-                [ExampleBanner, 'Alt 3']
+                [VRController_low, 'mobile'],
+                [VRController_mid, 'mobile'],
+                [VRController_high, 'mobile'],
+                [VRController_bib, 'mobile']
             ]
         }
     ];
@@ -99,9 +124,9 @@ function Carousel() {
     const Other = [
         {
             banner: ExampleBanner,
-            projectTitle: 'Example Project',
-            projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectTitle: 'PostGIS Spatial DBMS (WIP)',
+            projectSubtitle: 'Complete / Database / Designer and Developer',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
@@ -112,7 +137,7 @@ function Carousel() {
             banner: ExampleBanner,
             projectTitle: 'Example Project',
             projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
@@ -123,7 +148,7 @@ function Carousel() {
             banner: ExampleBanner,
             projectTitle: 'Example Project',
             projectSubtitle: 'Incomplete / Website / Designer',
-            projectDesc: 'A short meaningful description of the project.',
+            projectDesc: `A meaningful description of the project.`,
             images: [
                 [ExampleBanner, 'Alt 1'],
                 [ExampleBanner, 'Alt 2'],
