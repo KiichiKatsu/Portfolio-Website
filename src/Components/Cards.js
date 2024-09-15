@@ -169,6 +169,7 @@ function Cards({ data }) {
                                                         alt={image[1]}
                                                         draggable="false"
                                                         style={{
+                                                            backgroundColor:"hsl(0, 2%, 76%)",
                                                             display: "block",
                                                             maxWidth: "100%",
                                                             maxHeight: "100%",
