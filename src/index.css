@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Neutral, academic palette on a pearlescent ground.
+   Tailwind v4 exposes these under @theme as utilities: bg-paper, text-ink,
+   font-serif, border-line, etc.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+
+  /* Paper is a hair off-white so the pearl gradient can breathe underneath. */
+  --color-paper: #f4f3f7;
+  /* Never pure black — a warm, textured dark grey. */
+  --color-ink: #2b2b30;
+  --color-muted: #6d6d76;
+  --color-line: #e2e1ea;
+  --color-accent: #2b2b30;
+
+  /* Pearlescent stops */
+  --color-pearl: #f7f5fb;
+  --color-lavender: #ecebfa;
+  --color-mint: #e8f6ef;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* lets carousels break out to full-viewport width without a horizontal scrollbar */
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: #2b2b30;
+    color: #f7f5fb;
+  }
+}
+
+@layer components {
+  /* Soft fade at the left/right edges of a horizontal carousel track so
+     cards dissolve instead of hitting a hard cut. Smaller inset on phones. */
+  .edge-fade {
+    --edge: 1.25rem;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--edge),
+      #000 calc(100% - var(--edge)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--edge),
+      #000 calc(100% - var(--edge)),
+      transparent 100%
+    );
+  }
+
+  @media (min-width: 640px) {
+    .edge-fade {
+      --edge: 2.5rem;
+    }
+  }
+}
+
+/* Hide the scrollbar on carousel tracks without losing scroll. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal website and PhD portfolio for Kiichiro Tatsuzawa.
 
-## Available Scripts
+**Stack:** React 18 · Vite 6 · Tailwind CSS 4 · React Router 7 (HashRouter) ·
+Framer Motion · lucide-react
+**Deploy:** GitHub Pages (`gh-pages` branch) at
+<https://kiichikatsu.github.io/Portfolio-Website/>
 
-In the project directory, you can run:
+## Local development
 
-### `npm start`
+```bash
+npm install
+npm run dev        # http://localhost:5173/Portfolio-Website/
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> This machine has a user-local Node install at `~/.local/node`. If `npm` is
+> not found, add it to your shell:
+> `echo 'export PATH="$HOME/.local/node/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`
+> (or install Node your own way — nvm, Homebrew, the official pkg).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Build & deploy
 
-### `npm test`
+```bash
+npm run build      # outputs to dist/
+npm run preview    # serve the production build locally
+npm run deploy     # builds, then pushes dist/ to the gh-pages branch
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`predeploy` runs the build automatically before `deploy`.
 
-### `npm run build`
+## Project structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+index.html            Vite entry
+vite.config.js         base path (/Portfolio-Website/) + React + Tailwind plugins
+src/
+  main.jsx             React root + <HashRouter>
+  index.css            Tailwind import + design tokens (@theme)
+  App.jsx              layout shell + <Routes>
+  data/content.js      all editable copy: profile, research, hardware, awards
+  pages/               HomePage, HardwarePage, DesignPage, ExperiencePage
+  components/
+    PageTransition.jsx  <PageTransitionProvider> + <TransitionLink> (wipe/curtain)
+    Nav, Hero, Research, Hardware, DesignPortfolio, Experience, Awards,
+    Section, Carousel, CarouselCard, CardStack, PearlBackground, Footer
+  assets/              images, logos, SVGs (imported by components)
+public/                favicon, Resume.pdf, logos, robots.txt (copied as-is)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Routing & page transitions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Routes: `/` (Home — hero, quote, Research, Awards), `/hardware`, `/design`,
+`/experience`. `HashRouter` keeps deep links working on GitHub Pages without a
+`404.html` redirect.
 
-### `npm run eject`
+Nav links use `<TransitionLink>` (in `components/PageTransition.jsx`). Cross-page
+clicks run a two-phase cinematic transition: an ink-black sheet wipes in from the
+right, the route swaps underneath while covered, then the sheet splits down the
+middle and opens like curtains. Same-page targets (Research / Awards on Home)
+just smooth-scroll. Tune timing via `WIPE`, `CURTAIN`, `HOLD_MS` at the top of
+that file.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Editing content
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copy lives in [`src/data/content.js`](src/data/content.js) — update the
+`profile`, `research`, `hardware`, and `awards` exports there. Replace the
+"Photo" / "Image" placeholder blocks in the components with real assets from
+`src/assets/`.

@@ -1,47 +1,28 @@
 {
-  "homepage": "http://KiichiKatsu.github.io/Portfolio-Website",
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "portfolio-website",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://kiichikatsu.github.io/Portfolio-Website",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "framer-motion": "^11.5.0",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^1.41.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "react-use-measure": "^2.1.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-router-dom": "^7.18.3"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.1.1"
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "gh-pages": "^6.3.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^6.4.3"
   }
 }
