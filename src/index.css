@@ -25,6 +25,41 @@
   --color-mint: #e8f6ef;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   UI TUNING (CSS side) — twins of src/ui-config.js
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Nav bar height. Measured live by Nav.jsx and written back here; this is
+     just the first-paint fallback. The vertical carousels pin below it. */
+  --nav-h: 61px;
+
+  /* ── Vertical carousel scroll-snap "resistance" ──────────────────────────
+     Dead space padded above & below each card in the scroll track. Bigger =
+     more scroll distance to travel between snaps = heavier, more deliberate
+     flick needed to advance. (Native CSS snap → real trackpad haptics.) */
+  --snap-gap: 6vh;
+  /* Shifts the snap centre-line away from the exact middle if you need to. */
+  --snap-scroll-padding: 0px;
+
+  /* ── Frosted-glass backdrop intensity (PearlBackground.jsx) ─────────────── */
+  --bg-pearl-strength: 0.1; /* iridescent gradient over paper  (0 – 1)   */
+  --bg-sheen-opacity: 0.9; /*  blurred iridescent light blobs  (0 – 1)   */
+  --bg-frost-veil: 0.14; /*    all-over milky veil             (0 – 0.3) */
+  --bg-frost-top: 0.5; /*      dense frost cap behind nav      (0 – 1)   */
+
+  /* ── Crumpled-paper grain ───────────────────────────────────────────────
+     Removed from the current design — raise --paper-opacity above 0 to
+     reintroduce a subtle tactile paper texture over the whole backdrop. */
+  --paper-opacity: 0; /*     0 = off. Try 0.05 – 0.25.               */
+  --paper-blend: multiply; /* multiply | soft-light | overlay        */
+}
+
+@media (min-width: 640px) {
+  :root {
+    --nav-h: 69px;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -39,8 +74,14 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    /* lets carousels break out to full-viewport width without a horizontal scrollbar */
     overflow-x: clip;
+  }
+
+  /* Route lock — on the vertical-carousel pages nothing scrolls except the
+     carousel track itself; the page and all UI stay fixed. */
+  html.route-locked,
+  html.route-locked body {
+    overflow: hidden;
   }
 
   ::selection {
@@ -49,35 +90,7 @@
   }
 }
 
-@layer components {
-  /* Soft fade at the left/right edges of a horizontal carousel track so
-     cards dissolve instead of hitting a hard cut. Smaller inset on phones. */
-  .edge-fade {
-    --edge: 1.25rem;
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 var(--edge),
-      #000 calc(100% - var(--edge)),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 var(--edge),
-      #000 calc(100% - var(--edge)),
-      transparent 100%
-    );
-  }
-
-  @media (min-width: 640px) {
-    .edge-fade {
-      --edge: 2.5rem;
-    }
-  }
-}
-
-/* Hide the scrollbar on carousel tracks without losing scroll. */
+/* Hide the scrollbar on the carousel track without losing scroll. */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

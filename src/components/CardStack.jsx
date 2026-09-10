@@ -14,6 +14,9 @@ import LinkedinIcon from './icons/LinkedinIcon.jsx'
 import OrcidIcon from './icons/OrcidIcon.jsx'
 import logo from '../assets/logo.svg'
 import { profile } from '../data/content.js'
+import { UI_CONFIG } from '../ui-config.js'
+
+const D = UI_CONFIG.cardDrag
 
 const SHELL =
   'relative flex h-[10.3rem] w-[17rem] flex-col overflow-hidden rounded-2xl p-5 text-white ring-1 ring-white/10 sm:h-[11.4rem] sm:w-80 sm:p-6'
@@ -77,6 +80,9 @@ const CARDS = [
   },
 ]
 
+// The initial, fully-populated set — App resets card state to this on re-open.
+export const CARD_IDS = CARDS.map((c) => c.id)
+
 function computeBase(index) {
   const w = typeof window !== 'undefined' ? window.innerWidth : 1200
   const h = typeof window !== 'undefined' ? window.innerHeight : 800
@@ -106,12 +112,15 @@ function DraggableCard({
   const y = useMotionValue(0)
   const spring = reduced
     ? { stiffness: 700, damping: 42, mass: 1 }
-    : { stiffness: 330, damping: 30, mass: 1.15 }
+    : { stiffness: D.stiffness, damping: D.damping, mass: D.mass }
   const xs = useSpring(x, spring)
   const ys = useSpring(y, spring)
-  const tilt = useTransform(useVelocity(xs), [-1600, 1600], [-11, 11], {
-    clamp: true,
-  })
+  const tilt = useTransform(
+    useVelocity(xs),
+    [-D.tiltAtVelocity, D.tiltAtVelocity],
+    [-D.tiltMaxDeg, D.tiltMaxDeg],
+    { clamp: true },
+  )
   const tiltS = useSpring(tilt, { stiffness: 180, damping: 20 })
 
   const paintRef = useRef(null)
@@ -125,7 +134,7 @@ function DraggableCard({
     if (!t || !c) return false
     const px = c.left + c.width / 2
     const py = c.top + c.height / 2
-    const pad = 40
+    const pad = D.trashHitPadPx
     return (
       px >= t.left - pad &&
       px <= t.right + pad &&
@@ -165,7 +174,7 @@ function DraggableCard({
       window.setTimeout(() => {
         onActive(-1)
         onRemove(data.id)
-      }, 320)
+      }, D.trashFlyMs)
     }
   }
 
@@ -187,14 +196,14 @@ function DraggableCard({
                 ? { opacity: 0, scale: 0.05, rotate: base.rot + 35, y: 0 }
                 : {
                     opacity: 1,
-                    scale: dragging ? 1.04 : 1,
+                    scale: dragging ? D.hoverScale : 1,
                     rotate: base.rot,
                     y: 0,
                   }
             }
             transition={
               trashing
-                ? { duration: 0.3, ease: [0.4, 0, 1, 1] }
+                ? { duration: D.trashFlyMs / 1000, ease: [0.4, 0, 1, 1] }
                 : {
                     type: 'spring',
                     stiffness: 260,
@@ -220,8 +229,8 @@ function DraggableCard({
             reduced
               ? { power: 0, timeConstant: 0 }
               : {
-                  power: 0.3,
-                  timeConstant: 360,
+                  power: D.releaseGlide.power,
+                  timeConstant: D.releaseGlide.timeConstant,
                   bounceStiffness: 180,
                   bounceDamping: 22,
                 }
@@ -243,21 +252,17 @@ function DraggableCard({
   )
 }
 
-export default function CardStack({ onEmpty }) {
+/**
+ * Controlled: the list of card ids lives in App so the nav toggle can reset it
+ * to the full set on re-open (fixes the "trash both → won't respawn" bug).
+ */
+export default function CardStack({ ids, onRemove }) {
   const reduced = useReducedMotion()
-  const [cards, setCards] = useState(() => CARDS.map((c) => c.id))
   const [active, setActive] = useState(0)
   const [armed, setArmed] = useState(false)
   const trashRef = useRef(null)
 
   const bumpActive = (d) => setActive((n) => Math.max(0, n + d))
-
-  const removeCard = (id) =>
-    setCards((cs) => {
-      const next = cs.filter((c) => c !== id)
-      if (next.length === 0) onEmpty?.()
-      return next
-    })
 
   return (
     <motion.div
@@ -267,7 +272,7 @@ export default function CardStack({ onEmpty }) {
       transition={{ duration: 0.2 }}
       className="pointer-events-none fixed inset-0 z-[100]"
     >
-      {cards.map((id) => {
+      {ids.map((id) => {
         const index = CARDS.findIndex((c) => c.id === id)
         return (
           <DraggableCard
@@ -278,7 +283,7 @@ export default function CardStack({ onEmpty }) {
             trashRef={trashRef}
             onActive={bumpActive}
             onArmed={setArmed}
-            onRemove={removeCard}
+            onRemove={onRemove}
           />
         )
       })}

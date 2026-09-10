@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { IdCard, Menu, X } from 'lucide-react'
@@ -18,10 +18,27 @@ export default function Nav({ cardsOpen = false, onToggleCards }) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
   const { pathname } = useLocation()
+  const barRef = useRef(null)
+
+  // Publish the bar's real height as --nav-h so the vertical carousel pages
+  // can pin exactly below it.
+  useLayoutEffect(() => {
+    const publish = () => {
+      const h = barRef.current?.offsetHeight
+      // + 1 for the header's bottom border, which sits outside <nav>
+      if (h) document.documentElement.style.setProperty('--nav-h', `${h + 1}px`)
+    }
+    publish()
+    window.addEventListener('resize', publish)
+    return () => window.removeEventListener('resize', publish)
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/30 bg-white/25 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-6 sm:py-4">
+      <nav
+        ref={barRef}
+        className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-6 sm:py-4"
+      >
         <TransitionLink
           to="/"
           onNavigate={close}
