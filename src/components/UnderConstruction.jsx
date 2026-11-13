@@ -65,18 +65,18 @@ export default function UnderConstruction() {
             animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={reduced ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
             transition={fade}
-            className="relative w-full max-w-sm rounded-2xl border border-white/60 bg-white/85 p-6 text-center shadow-[0_30px_60px_-18px_rgba(30,30,40,0.35)] backdrop-blur-md sm:p-7"
+            className="relative w-full max-w-sm rounded-[10px] border border-white/60 bg-white/85 p-6 text-center shadow-[0_30px_60px_-18px_rgba(30,30,40,0.35)] backdrop-blur-md sm:p-7"
           >
             <button
               type="button"
               onClick={dismiss}
               aria-label="Dismiss notice"
-              className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-ink/5 hover:text-ink"
+              className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-[6px] text-muted transition-colors hover:bg-ink/5 hover:text-ink"
             >
               <X className="h-4 w-4" />
             </button>
 
-            <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-ink text-white">
+            <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-[8px] bg-ink text-white">
               <Construction className="h-5 w-5" />
             </span>
 
@@ -95,7 +95,7 @@ export default function UnderConstruction() {
             <button
               type="button"
               onClick={dismiss}
-              className="mt-5 inline-flex items-center justify-center rounded-lg bg-ink px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-ink/90"
+              className="mt-5 inline-flex items-center justify-center rounded-[6px] bg-ink px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-ink/90"
             >
               Got it
             </button>

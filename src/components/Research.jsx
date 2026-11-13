@@ -1,28 +1,28 @@
-import Section from './Section.jsx'
+import Section, { Reveal } from './Section.jsx'
 import { research } from '../data/content.js'
 
+// Light chapter; HomePage wraps it in a PressPin into the dark Experience chapter.
 export default function Research() {
   return (
-    <Section id="research" eyebrow="01" title="Research & Publications">
-      <ol className="space-y-8 sm:space-y-10">
+    <Section id="research" kicker="Research" title="Publications">
+      <ol className="border-t border-ink/10">
         {research.map((item, i) => (
-          <li
-            key={i}
-            className="grid gap-1.5 sm:grid-cols-[130px_1fr] sm:gap-6 md:grid-cols-[140px_1fr] md:gap-8"
+          <Reveal
+            as="li"
+            key={item.title}
+            delay={i * 0.08}
+            className="grid gap-2 border-b border-ink/10 py-8 sm:grid-cols-[180px_1fr] sm:gap-8 sm:py-10"
           >
-            <div className="text-sm text-muted">
-              <span className="font-medium text-ink">{item.venue}</span>
-              <span className="sm:hidden"> · </span>
-              <span className="sm:block">{item.status}</span>
+            <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+              <span className="text-ink">{item.venue}</span>
+              <span className="sm:block"> · {item.status}</span>
             </div>
             <div>
-              <h3 className="font-serif text-lg text-ink sm:text-xl">{item.title}</h3>
-              <p className="mt-1 text-sm text-muted">{item.authors}</p>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80">
-                {item.summary}
-              </p>
+              <h3 className="font-serif text-xl font-semibold tracking-[-0.03em] sm:text-2xl">{item.title}</h3>
+              <p className="mt-1.5 text-sm text-muted">{item.authors}</p>
+              <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/80">{item.summary}</p>
             </div>
-          </li>
+          </Reveal>
         ))}
       </ol>
     </Section>

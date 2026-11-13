@@ -6,10 +6,13 @@
    font-serif, border-line, etc.
 --------------------------------------------------------------------------- */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  /* Body: Plus Jakarta Sans. Headings: JetBrains Mono (kept on the font-serif
+     token so every heading picks it up). Old pair: Inter + Newsreader. */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
+  --font-serif: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Paper is a hair off-white so the pearl gradient can breathe underneath. */
   --color-paper: #f4f3f7;
@@ -29,41 +32,19 @@
    UI TUNING (CSS side) — twins of src/ui-config.js
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* Nav bar height. Measured live by Nav.jsx and written back here; this is
-     just the first-paint fallback. The vertical carousels pin below it. */
-  --nav-h: 61px;
-
-  /* ── Vertical carousel scroll-snap "resistance" ──────────────────────────
-     Dead space padded above & below each card in the scroll track. Bigger =
-     more scroll distance to travel between snaps = heavier, more deliberate
-     flick needed to advance. (Native CSS snap → real trackpad haptics.) */
-  --snap-gap: 6vh;
-  /* Shifts the snap centre-line away from the exact middle if you need to. */
-  --snap-scroll-padding: 0px;
-
-  /* ── Frosted-glass backdrop intensity (PearlBackground.jsx) ─────────────── */
-  --bg-pearl-strength: 0.1; /* iridescent gradient over paper  (0 – 1)   */
-  --bg-sheen-opacity: 0.9; /*  blurred iridescent light blobs  (0 – 1)   */
-  --bg-frost-veil: 0.14; /*    all-over milky veil             (0 – 0.3) */
-  --bg-frost-top: 0.5; /*      dense frost cap behind nav      (0 – 1)   */
-
-  /* ── Crumpled-paper grain ───────────────────────────────────────────────
-     Removed from the current design — raise --paper-opacity above 0 to
-     reintroduce a subtle tactile paper texture over the whole backdrop. */
-  --paper-opacity: 0; /*     0 = off. Try 0.05 – 0.25.               */
-  --paper-blend: multiply; /* multiply | soft-light | overlay        */
+  /* Space reserved at the bottom for the floating menu (FloatMenu.jsx). */
+  --float-h: 72px;
 }
 
 @media (min-width: 640px) {
   :root {
-    --nav-h: 69px;
+    --float-h: 92px;
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -77,12 +58,6 @@
     overflow-x: clip;
   }
 
-  /* Route lock — on the vertical-carousel pages nothing scrolls except the
-     carousel track itself; the page and all UI stay fixed. */
-  html.route-locked,
-  html.route-locked body {
-    overflow: hidden;
-  }
 
   ::selection {
     background-color: #2b2b30;
@@ -90,11 +65,92 @@
   }
 }
 
-/* Hide the scrollbar on the carousel track without losing scroll. */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Carousel progress line — fills left→right; animationend advances the slide. */
+@keyframes carousel-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.carousel-progress {
+  animation-name: carousel-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Mono headings read wide — pull the tracking in a touch. In a layer so a
+   tracking-* utility (e.g. the hero name) can still override it. */
+@layer base {
+  .font-serif {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Pseudo-haptic cursor (HapticCursor.jsx) replaces the native one on fine
+   pointers. The class is only added when it is actually running. */
+html.haptic-cursor,
+html.haptic-cursor * {
+  cursor: none !important;
+}
+
+/* The haptic cursor draws one shared highlight ring itself (HapticCursor.jsx).
+   Keyboard focus gets a matching outline. */
+[data-haptic]:focus-visible {
+  outline: 1.5px solid var(--haptic-ring, currentColor);
+  outline-offset: 3px;
+}
+
+/* Carousel titles: the digital-highlight marker. Black behind the current
+   item; grey behind the one under the pointer (or holding the haptic cursor). */
+.carousel-title {
+  padding: 0.04em 0.22em;
+  margin-left: -0.22em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+html:not(.haptic-cursor) [role='tab']:not([aria-selected='true']):hover .carousel-title,
+[role='tab'][data-haptic-active]:not([aria-selected='true']) .carousel-title {
+  background-color: #9a99a3;
+  color: #fff;
+}
+[role='tab'][aria-selected='true'] .carousel-title {
+  background-color: var(--color-ink);
+  color: #fff;
+}
+html:not(.haptic-cursor) [role='tab']:not([aria-selected='true']):hover .carousel-title--dark,
+[role='tab'][data-haptic-active]:not([aria-selected='true']) .carousel-title--dark {
+  background-color: rgb(255 255 255 / 0.35);
+  color: var(--color-ink);
+}
+[role='tab'][aria-selected='true'] .carousel-title--dark {
+  background-color: #fff;
+  color: var(--color-ink);
+}
+
+/* "TOUCH" buzzes like a phone on a desk: a short burst every few seconds, and
+   on hover. */
+@keyframes buzz {
+  0%, 8%, 100% { transform: translate(0, 0) rotate(0); }
+  1% { transform: translate(-2px, 1px) rotate(-0.6deg); }
+  2% { transform: translate(2px, -1px) rotate(0.6deg); }
+  3% { transform: translate(-2px, -1px) rotate(-0.4deg); }
+  4% { transform: translate(2px, 1px) rotate(0.4deg); }
+  5% { transform: translate(-1px, 0) rotate(-0.2deg); }
+  6% { transform: translate(1px, 0) rotate(0.2deg); }
+}
+@keyframes buzz-once {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-3px, 1px) rotate(-0.8deg); }
+  30% { transform: translate(3px, -1px) rotate(0.8deg); }
+  45% { transform: translate(-2px, -1px) rotate(-0.5deg); }
+  60% { transform: translate(2px, 1px) rotate(0.5deg); }
+  75% { transform: translate(-1px, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .touch-buzz-wrap {
+    animation: buzz 5s 2s infinite;
+  }
+  .touch-buzz-wrap:hover {
+    animation: buzz-once 0.45s;
+  }
 }

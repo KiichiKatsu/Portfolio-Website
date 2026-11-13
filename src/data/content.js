@@ -7,6 +7,8 @@ export const profile = {
   name: 'Kiichiro Tatsuzawa',
   role: 'PhD Researcher — Human–Computer Interaction',
   affiliation: 'The University of Queensland',
+  // Short opener shown above the summary in the hero.
+  tagline: 'Designing for the sense of touch.',
   summary:
     'I study how the sense of touch can be designed for. My work looks at subperceptual haptic interventions, multi-digit haptic interaction, and the hardware needed to deliver both — building custom interfaces, sensor arrays, and prototyping rigs along the way.',
   location: 'Brisbane, Australia',
@@ -16,6 +18,14 @@ export const profile = {
     email: 'kiichiro.tatsuzawa@gmail.com',
   },
 }
+
+// Pinned, scroll-revealed statements between the hero and the work (Statements.jsx).
+// Placeholder copy — rewrite in your own voice. Keep each to one or two lines.
+export const statements = [
+  'Touch is the sense we design for the least.',
+  'Some of the most useful signals are the ones you never consciously feel.',
+  'So I build the hardware to find out what they can do.',
+]
 
 // Small banner under the hero — swap in a quote you resonate with.
 export const quote = {

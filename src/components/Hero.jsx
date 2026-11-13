@@ -1,67 +1,135 @@
-import { motion } from 'framer-motion'
-import { Mail } from 'lucide-react'
-import LinkedinIcon from './icons/LinkedinIcon.jsx'
-import OrcidIcon from './icons/OrcidIcon.jsx'
-import { profile } from '../data/content.js'
+import { useRef } from 'react'
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import RingLine from './RingLine.jsx'
+import { profile, quote } from '../data/content.js'
 
 const socials = [
-  { href: profile.links.linkedin, label: 'LinkedIn', Icon: LinkedinIcon, external: true },
-  { href: profile.links.orcid, label: 'ORCID', Icon: OrcidIcon, external: true },
-  { href: `mailto:${profile.links.email}`, label: 'Email', Icon: Mail, external: false },
+  { href: profile.links.linkedin, label: 'LinkedIn', external: true },
+  { href: profile.links.orcid, label: 'ORCID', external: true },
+  { href: `mailto:${profile.links.email}`, label: 'Email', external: false },
 ]
 
+const EASE = [0.22, 1, 0.36, 1]
+
+// Split the intro into its first sentence (bold) and the rest, from whatever
+// the copy in content.js says — nothing here depends on the current wording.
+function splitFirstSentence(text) {
+  const m = text.trim().match(/^(.+?[.!?]['"”’)]*)(?:\s+([\s\S]*))?$/)
+  return m ? { lead: m[1], rest: m[2] ?? '' } : { lead: text.trim(), rest: '' }
+}
+const intro = splitFirstSentence([profile.tagline, profile.summary].filter(Boolean).join(' '))
+
+/**
+ * Landing hero (after davidecarusio.it): one screen, mostly air.
+ *   - a short intro, small, tucked into the top-right corner, with the
+ *     favourite quote under it in the lightest weight
+ *   - bottom: a tiny mono label row, a hairline, then the name in the
+ *     black digital-highlight marker
+ * It fills the screen under the top bar, so on landing the name sits at the
+ * bottom of the first screen (the floating menu only appears once the top bar
+ * has scrolled away). As you scroll away the content drifts up and
+ * fades; HomePage wraps it in a PressPin that presses it into the dark statements.
+ */
 export default function Hero() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  // springed so the content trails the scroll and settles with weight
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, -160]), { stiffness: 90, damping: 22, mass: 1.2 })
+  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
+
   return (
     <section
+      ref={ref}
       id="top"
-      className="mx-auto max-w-5xl px-5 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 md:pb-24 md:pt-24"
+      className="relative flex flex-col sm:px-1 lg:px-4"
+      // fills the first screen under the top bar; the floating menu is hidden
+      // until the top bar scrolls away, so only a breathing margin at the bottom
+      style={{ minHeight: 'calc(100svh - 62px)', paddingBottom: 'clamp(1.75rem, 5svh, 3.25rem)' }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="grid gap-8 sm:gap-10 md:grid-cols-[200px_1fr] md:gap-14"
-      >
-        {/* Portrait placeholder */}
-        <div className="mx-auto w-28 sm:w-36 md:mx-0 md:w-full">
-          <div className="aspect-square w-full overflow-hidden rounded-full border border-white/60 bg-white/50 shadow-[0_18px_40px_-20px_rgba(30,30,40,0.25)] backdrop-blur-sm">
-            <div className="flex h-full w-full select-none items-center justify-center text-[10px] uppercase tracking-widest text-ink/30 sm:text-xs">
-              Photo
-            </div>
-          </div>
+      <motion.div style={{ y, opacity }} className="mx-auto flex w-full max-w-[96rem] flex-1 flex-col px-2.5">
+        {/* intro — small, top-right */}
+        <div className="flex flex-1 items-start justify-end pb-16 pt-10 md:pt-14">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
+            className="max-w-[22rem] text-[14px] font-medium leading-snug tracking-tight text-ink sm:text-[15px]"
+          >
+            {/* one fully justified block, hyphenated so the spacing stays even;
+                whatever the first sentence is, it's set bold */}
+            <p className="text-justify hyphens-auto">
+              <strong className="font-extrabold">{intro.lead}</strong>
+              {intro.rest && ` ${intro.rest}`}
+            </p>
+
+            {/* the favourite quote, under the intro in the lightest weight */}
+            {quote?.text && (
+              <figure className="mt-6">
+                <blockquote className="text-justify font-extralight hyphens-auto">
+                  &ldquo;{quote.text}&rdquo;
+                </blockquote>
+                {quote.attribution && (
+                  <figcaption className="mt-2 font-mono text-[10px] font-normal uppercase tracking-[0.06em] text-muted">
+                    {quote.attribution}
+                  </figcaption>
+                )}
+              </figure>
+            )}
+          </motion.div>
         </div>
 
-        <div className="min-w-0">
-          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.2em] text-muted sm:text-xs">
-            {profile.role}
-          </p>
-          <h1 className="font-serif text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
-            {profile.name}
-          </h1>
-          <p className="mt-2 text-sm text-muted">
-            {profile.affiliation} · {profile.location}
-          </p>
-
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/80 sm:mt-6 sm:text-base">
-            {profile.summary}
-          </p>
-
-          <ul className="mt-7 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-3">
-            {socials.map(({ href, label, Icon, external }) => (
-              <li key={label}>
+        {/* bottom block */}
+        <div className="@container">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.06em] text-muted"
+          >
+            <span>
+              {profile.role} · {profile.affiliation}
+            </span>
+            <span className="flex gap-5">
+              {socials.map(({ href, label, external }) => (
                 <a
+                  key={label}
                   href={href}
-                  {...(external
-                    ? { target: '_blank', rel: 'noreferrer noopener' }
-                    : {})}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/50 px-3.5 py-2 text-[13px] text-ink backdrop-blur-sm transition-colors hover:bg-ink hover:text-paper sm:px-4 sm:text-sm"
+                  {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                  data-haptic data-haptic-axis="x"
+                  // padding = breathing room for the highlight ring; the negative
+                  // margin keeps the text exactly where it was
+                  className="-mx-2.5 -my-1.5 rounded-[6px] px-2.5 py-1.5 transition-colors hover:text-ink"
                 >
-                  <Icon className="h-4 w-4" />
-                  {label}
+                  {label} ↗
                 </a>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </span>
+          </motion.div>
+
+          <RingLine className="mt-3 text-ink/20 sm:mt-5" delay={0.35} />
+
+          {/* the name, in the digital-highlight marker: a black bar wipes in
+              from the left, then the name fades up in white on top of it.
+              No side padding — it hugs the letters like a highlighter stroke. */}
+          <h1 className="mt-5 font-serif font-semibold leading-none sm:mt-8">
+            <span className="relative inline-block py-[0.06em] text-[clamp(2rem,3.8cqw,3.4rem)] tracking-[-0.03em]">
+              <motion.span
+                aria-hidden="true"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
+                className="absolute inset-0 origin-left bg-ink"
+              />
+              <motion.span
+                initial={{ opacity: 0, y: '0.25em' }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: EASE, delay: 0.55 }}
+                className="relative inline-block text-white"
+              >
+                {profile.name}
+              </motion.span>
+            </span>
+          </h1>
         </div>
       </motion.div>
     </section>

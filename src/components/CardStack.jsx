@@ -19,7 +19,7 @@ import { UI_CONFIG } from '../ui-config.js'
 const D = UI_CONFIG.cardDrag
 
 const SHELL =
-  'relative flex h-[10.3rem] w-[17rem] flex-col overflow-hidden rounded-2xl p-5 text-white ring-1 ring-white/10 sm:h-[11.4rem] sm:w-80 sm:p-6'
+  'relative flex h-[10.3rem] w-[17rem] flex-col overflow-hidden rounded-[10px] p-5 text-white ring-1 ring-white/10 sm:h-[11.4rem] sm:w-80 sm:p-6'
 
 const INK_BG =
   'radial-gradient(130% 130% at 0% 0%, #2a2a30 0%, #161618 46%, #0c0c0e 100%)'
@@ -214,7 +214,7 @@ function DraggableCard({
             className={SHELL}
             style={{ backgroundImage: INK_BG, boxShadow: INK_SHADOW }}
           >
-            <span className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.07] to-transparent" />
+            <span className="pointer-events-none absolute inset-0 rounded-[10px] bg-gradient-to-b from-white/[0.07] to-transparent" />
             {data.render()}
           </motion.div>
         </motion.div>
@@ -297,7 +297,7 @@ export default function CardStack({ ids, onRemove }) {
             animate={{ opacity: 1, y: 0, scale: armed ? 1.18 : 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.8 }}
             transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-            className="fixed bottom-4 left-4 z-[150] flex h-14 w-14 items-center justify-center rounded-2xl ring-1 ring-white/10 sm:bottom-6 sm:left-6 sm:h-16 sm:w-16"
+            className="fixed bottom-4 left-4 z-[150] flex h-14 w-14 items-center justify-center rounded-[8px] ring-1 ring-white/10 sm:bottom-6 sm:left-6 sm:h-16 sm:w-16"
             style={{
               backgroundImage: armed
                 ? 'radial-gradient(130% 130% at 0% 0%, #7a1f1f 0%, #3a1212 100%)'

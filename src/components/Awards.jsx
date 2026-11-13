@@ -1,18 +1,24 @@
-import Section from './Section.jsx'
+import Section, { Reveal } from './Section.jsx'
 import { awards } from '../data/content.js'
 
+// Light chapter; HomePage wraps it in a PressPin release out of dark Experience.
 export default function Awards() {
   return (
-    <Section id="awards" eyebrow="05" title="Awards & Recognition">
-      <ul className="divide-y divide-line border-y border-line">
+    <Section id="awards" kicker="Recognition" title="Awards">
+      <ul className="border-t border-ink/10">
         {awards.map((item, i) => (
-          <li key={i} className="flex gap-4 py-4 sm:gap-6">
-            <span className="w-12 shrink-0 text-sm text-muted sm:w-14">{item.year}</span>
-            <span className="text-sm text-ink">
-              {item.title}
-              <span className="text-muted"> — {item.detail}</span>
+          <Reveal
+            as="li"
+            key={item.title}
+            delay={i * 0.08}
+            className="grid gap-1 border-b border-ink/10 py-6 sm:grid-cols-[180px_1fr] sm:gap-8"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">{item.year}</span>
+            <span>
+              <span className="font-serif text-lg font-semibold tracking-[-0.03em] sm:text-xl">{item.title}</span>
+              <span className="mt-1 block text-sm text-muted">{item.detail}</span>
             </span>
-          </li>
+          </Reveal>
         ))}
       </ul>
     </Section>

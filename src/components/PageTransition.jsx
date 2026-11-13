@@ -64,11 +64,29 @@ function buildWipe() {
 }
 const WIPE = buildWipe()
 
+// Where an in-page jump should land. Sections opening with a PressPin release
+// are fully covered in ink for their first screen(s), so land just past it.
+function targetTop(id) {
+  if (!id) return 0
+  const el = document.getElementById(id)
+  if (!el) return null
+  const pin = el.closest('[data-pin-release]')
+  if (pin) {
+    return pin.getBoundingClientRect().top + window.scrollY + parseFloat(pin.dataset.pinRelease) * window.innerHeight
+  }
+  return el.getBoundingClientRect().top + window.scrollY
+}
+
+// In-page jumps further than this (in screens) get the full wipe + curtain;
+// shorter ones just scroll smoothly.
+const FAR_SCREENS = 1.2
+
 const Ctx = createContext(null)
 export const usePageTransition = () => useContext(Ctx)
 
 /**
- * Drives a two-phase page transition:
+ * Drives a two-phase transition — between pages, and for long jumps within
+ * the page (more than FAR_SCREENS away):
  *   1. WIPE    — one ink-black sheet is dragged in from the right with visible
  *                effort (bursts, stalls, hauls, stalls, pulls home).
  *   2. CURTAIN — once covered (route swapped underneath), it splits at the
@@ -86,13 +104,18 @@ export function PageTransitionProvider({ children }) {
       if (phase !== 'idle') return
       const samePath = (location.pathname || '/') === to
       if (samePath) {
-        if (scrollTo) {
-          document
-            .getElementById(scrollTo)
-            ?.scrollIntoView({ behavior: 'smooth' })
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+        const top = targetTop(scrollTo)
+        if (top === null) return
+        const far = Math.abs(top - window.scrollY) > window.innerHeight * FAR_SCREENS
+        if (!far) {
+          window.scrollTo({ top, behavior: 'smooth' })
+          return
         }
+        // a long jump on the same page: cover with the wipe, jump underneath,
+        // then open the curtain on the destination
+        pending.current = { to: null, scrollTo }
+        coveredRef.current = false
+        setPhase('wipe')
         return
       }
       pending.current = { to, scrollTo }
@@ -109,15 +132,11 @@ export function PageTransitionProvider({ children }) {
     const next = pending.current
     pending.current = null
     setPhase('cover')
-    if (next) navigate(next.to)
+    if (next?.to) navigate(next.to)
     window.setTimeout(() => {
-      if (next?.scrollTo) {
-        document
-          .getElementById(next.scrollTo)
-          ?.scrollIntoView({ behavior: 'auto' })
-      } else {
-        window.scrollTo(0, 0)
-      }
+      // 'instant' — the stylesheet's smooth scrolling would otherwise crawl
+      // the page along under the cover
+      window.scrollTo({ top: targetTop(next?.scrollTo) ?? 0, behavior: 'instant' })
       setPhase('curtain')
     }, C.holdMs)
   }
@@ -166,9 +185,9 @@ export function PageTransitionProvider({ children }) {
 }
 
 /**
- * Drop-in replacement for <Link>. Same-page targets just scroll; cross-page
- * targets run the cinematic transition. `scrollTo` is an element id to land on
- * after the new page loads (used for the on-Home sections).
+ * Drop-in replacement for <Link>. Nearby same-page targets scroll smoothly;
+ * far ones (and cross-page targets) run the cinematic wipe + curtain.
+ * `scrollTo` is the id of the section to land on.
  */
 export function TransitionLink({
   to,
